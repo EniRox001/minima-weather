@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Weather Application</title>
+</head>
+<body>
+    <div class="main-container">
+        <div class="content-top">
+            <img src="/images/img-1.jpg" alt="">
+            <div class="font time-date">
+                <div class="time">7:10 <span class="am">AM</span></div>
+                <div class="date">Friday, 27 January, 2022</div>
+                <form action="/" method="POST">
+                    <img class="search-icon" src="/svg/search.png" alt="">
+                    <input name="location" class="search-bar font" type="text" placeholder="Enter Location">
+                </form>
+            </div>
+            <div class="location"><%= location %></div>
+        </div>
+        <div class="content-bottom font">
+            <div class="mb-items">
+                <div class="mb-weather-description">Scattered Clouds</div>
+                <div class="mb-search"><a href=""><img src="/svg/search.png" alt=""></a></div>
+                <div class="mb-date-location">
+                    <div class="mb-date">Today</div>
+                    <div class="mb-location">Australia</div>
+                </div>
+                <div class="mb-weather">
+                    <div class="weather-forecast">
+                        <div class="mb-weather-time">
+                            Now
+                        </div>
+                        <img class="mb-weather-icon" src="/svg/thunderstorm.png" alt="">
+                        <div class="mb-weather-temp">
+                            22°
+                        </div>
+                    </div>
+                    <div class="weather-forecast">
+                        <div class="mb-weather-time">
+                            5PM
+                        </div>
+                        <img class="mb-weather-icon" src="/svg/shower rain.png" alt="">
+                        <div class="mb-weather-temp">
+                            25°
+                        </div>
+                    </div>
+                    <div class="weather-forecast">
+                        <div class="mb-weather-time">
+                            6PM
+                        </div>
+                        <img class="mb-weather-icon" src="/svg/shower rain.png" alt="">
+                        <div class="mb-weather-temp">
+                            28°
+                        </div>
+                    </div>
+                    <div class="weather-forecast">
+                        <div class="mb-weather-time">
+                            7PM
+                        </div>
+                        <img class="mb-weather-icon" src="/svg/rain.png" alt="">
+                        <div class="mb-weather-temp">
+                            21°
+                        </div>
+                    </div>
+                    <div class="weather-forecast">
+                        <div class="mb-weather-time">
+                            8PM
+                        </div>
+                        <img class="mb-weather-icon" src="/svg/scattered clouds.png" alt="">
+                        <div class="mb-weather-temp">
+                            18°
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weather-items">
+                <div class="weather">
+                    <img class="weather-icon" src="/svg/thunderstorm.png" alt="">
+                    <div class="weather-text">Raining</div>
+                </div>
+                <div class="temp">
+                    <div class="temp-min">
+                        28°
+                        <span class="temp-min-text">Temperature</span>
+                    </div>
+                    <div class="temp-max">
+                        23°
+                        <span class="temp-max-text">Feels Like</span>
+                    </div>
+                </div>
+                <div class="humidity">
+                    <img class="humidity-icon" src="/svg/humidity.png" alt="">
+                    <div class="humidity-title">Humidity (%)</div>
+                    <div class="divider"></div>
+                    <div class="humidity-reading">20</div>
+                </div>
+                <div class="pressure">
+                    <img class="pressure-icon" src="/svg/pressure.png"" alt="">
+                    <div class="pressure-title">Pressure (Hg)</div>
+                    <div class="divider"></div>
+                    <div class="pressure-reading">486</div>
+                </div>
+                <div class="wind">
+                    <img class="wind-icon" src="/svg/wind.png"" alt="">
+                    <div class="wind-title">Wind (mph)</div>
+                    <div class="divider"></div>
+                    <div class="wind-reading">935</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
