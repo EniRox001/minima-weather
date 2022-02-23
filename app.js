@@ -48,8 +48,6 @@ app.get("/", (req, res) => {
 app.post("/", (req, res) => {
     const query = req.body.location;
     const apiKey = "d527b6758c87d7dfaeb6e2044f266605";
-    const unit = "metric";
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=${unit}&appid=${apiKey}`;
     const latlonUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=${apiKey}`
 
     https.get(latlonUrl, (response) => {
