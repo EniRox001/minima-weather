@@ -30,7 +30,7 @@
                 <div class="mb-search"><a href=""><img src="/svg/search.png" alt=""></a></div>
                 <div class="mb-date-location">
                     <div class="mb-date">Today</div>
-                    <div class="mb-location"><%= location %></div>
+                    <div class="mb-location"><%= location.replace(/\b\w/g, v => v.toUpperCase()) %></div>
                 </div>
                 <div class="mb-weather">
                     <div class="weather-forecast">
@@ -82,16 +82,16 @@
             </div>
             <div class="weather-items">
                 <div class="weather">
-                    <img class="weather-icon" src="/svg/thunderstorm.png" alt="">
-                    <div class="weather-text">Raining</div>
+                    <img class="weather-icon" src="/svg/<%= weatherIcon %>.png" alt="">
+                    <div class="weather-text"><%= description %></div>
                 </div>
                 <div class="temp">
                     <div class="temp-min">
-                        <%= temperature_main %>°
+                        <%= Math.round(temperature_main) %>°
                         <span class="temp-min-text">Temperature</span>
                     </div>
                     <div class="temp-max">
-                        <%= temperature_feels_like %>°
+                        <%= Math.round(temperature_feels_like) %>°
                         <span class="temp-max-text">Feels Like</span>
                     </div>
                 </div>
