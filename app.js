@@ -20,9 +20,24 @@ app.use(express.static("public"));
 //Initialize body parser for use
 app.use(bodyParser.urlencoded({extended: true}));
 
+const defaultValues = {
+    location: "London",
+    temperature_main: 28,
+    temperature_feels_like: 23,
+    humidity: 71,
+    pressure: 1016,
+    wind: 7.72
+}
+
 app.get("/", (req, res) => {
-    const location = "Australia"
-    res.render("home", {location: location})
+    res.render("home", {
+        location: defaultValues.location,
+        temperature_main: defaultValues.temperature_main,
+        temperature_feels_like: defaultValues.temperature_feels_like,
+        humidity: defaultValues.humidity,
+        pressure: defaultValues.pressure,
+        wind: defaultValues.wind
+    })
 });
 
 app.post("/", (req, res) => {
@@ -44,8 +59,8 @@ app.post("/", (req, res) => {
 
             res.render("home", {
                 location: query,
-                temperature: tempMain,
-                tempFeelsLike: tempFeelsLike,
+                temperature_main: tempMain,
+                temperature_feels_like: tempFeelsLike,
                 humidity: humidity,
                 pressure: pressure,
                 wind: wind
