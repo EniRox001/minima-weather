@@ -234,19 +234,22 @@ img {
 }
 
 @media (max-width: 750px) {
-    .location {
+    .mb-form-body {
         position: absolute;
+        width: 100%;
+        top: 2em;
         left: 0;
-        top: -60px;
-        width: 100%
-     }
+        text-align: center;
+    }
 
-    .mb-search {
-        position: absolute;
-        top: 3.5em;
-        right: 2em;
-        height: 1.75em;
-        width: 1.75em;
+    .mb-form {
+        text-align: center;
+        width: 70%;
+        height: 3em;
+        background: white;
+        box-sizing: border-box;
+        border-radius: 25px;
+        border: .25em solid #001219;
     }
 
     .mb-items {
@@ -258,7 +261,8 @@ img {
     .pressure,
     .humidity,
     .wind,
-    .temp-max {
+    .temp-max,
+    .location {
         display: none;
     }
     
@@ -298,3 +302,5 @@ img {
         margin-top: 3em;
     }
 }
+
+

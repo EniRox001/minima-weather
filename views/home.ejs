@@ -13,7 +13,7 @@
 <body>
     <div class="main-container">
         <div class="content-top">
-            <img src="/images/img-1.jpg" alt="">
+            <img src="/images/one.jpg" alt="">
             <div class="font time-date">
                 <div class="time"><%= time %></div>
                 <div class="date"><%= date %></div>
@@ -26,8 +26,12 @@
         </div>
         <div class="content-bottom font">
             <div class="mb-items">
+                <div class="mb-form-body">
+                    <form action="/" method="POST">
+                        <input name="location" class="mb-form font" type="text" placeholder="Enter Location">
+                    </form>
+                </div>
                 <div class="mb-weather-description">Scattered Clouds</div>
-                <div class="mb-search"><a href=""><img src="/svg/search.png" alt=""></a></div>
                 <div class="mb-date-location">
                     <div class="mb-date">Today</div>
                     <div class="mb-location"><%= location.replace(/\b\w/g, v => v.toUpperCase()) %></div>
@@ -37,43 +41,43 @@
                         <div class="mb-weather-time">
                             Now
                         </div>
-                        <img class="mb-weather-icon" src="/svg/thunderstorm.png" alt="">
+                        <img class="mb-weather-icon" src="/svg/<%= weatherIcon %>.png" alt="">
                         <div class="mb-weather-temp">
                             <%= Math.round(temperature_main) %>°
                         </div>
                     </div>
                     <div class="weather-forecast">
                         <div class="mb-weather-time">
-                            <%= hourlyData.hour[0] %>
+                            <%= hourlyData.hour[0] %>:00
                         </div>
-                        <img class="mb-weather-icon" src="/svg/shower rain.png" alt="">
+                        <img class="mb-weather-icon" src="/svg/<%= hourlyData.displayIcon[0] %>.png" alt="">
                         <div class="mb-weather-temp">
                             <%= Math.round(hourlyData.tempMain[0]) %>°
                         </div>
                     </div>
                     <div class="weather-forecast">
                         <div class="mb-weather-time">
-                            <%= hourlyData.hour[1] %>
+                            <%= hourlyData.hour[1] %>:00
                         </div>
-                        <img class="mb-weather-icon" src="/svg/shower rain.png" alt="">
+                        <img class="mb-weather-icon" src="/svg/<%= hourlyData.displayIcon[1] %>.png" alt="">
                         <div class="mb-weather-temp">
                             <%= Math.round(hourlyData.tempMain[1]) %>°
                         </div>
                     </div>
                     <div class="weather-forecast">
                         <div class="mb-weather-time">
-                            <%= hourlyData.hour[2] %>
+                            <%= hourlyData.hour[2] %>:00
                         </div>
-                        <img class="mb-weather-icon" src="/svg/rain.png" alt="">
+                        <img class="mb-weather-icon" src="/svg/<%= hourlyData.displayIcon[2] %>.png" alt="">
                         <div class="mb-weather-temp">
                             <%= Math.round(hourlyData.tempMain[2]) %>°
                         </div>
                     </div>
                     <div class="weather-forecast">
                         <div class="mb-weather-time">
-                            <%= hourlyData.hour[3] %>
+                            <%= hourlyData.hour[3] %>:00
                         </div>
-                        <img class="mb-weather-icon" src="/svg/scattered clouds.png" alt="">
+                        <img class="mb-weather-icon" src="/svg/<%= hourlyData.displayIcon[3] %>.png" alt="">
                         <div class="mb-weather-temp">
                             <%= Math.round(hourlyData.tempMain[3]) %>°
                         </div>
