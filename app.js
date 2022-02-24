@@ -2,8 +2,6 @@
 const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const axios = require("axios")
 const https = require("https");
 const http = require("http")
 const { response } = require("express");
@@ -21,9 +19,39 @@ app.use(express.static("public"));
 //Initialize body parser for use
 app.use(bodyParser.urlencoded({extended: true}));
 
+let date = new Date()
+let hour = date.getHours()
+let minute = date.getMinutes()
+
+let formatted_time = date.toLocaleString('en-us', {
+    hour: '2-digit', // numeric, 2-digit
+    minute: '2-digit', // numeric, 2-digit
+});
+let formatted_date = date.toLocaleString('en-us', {
+    weekday: 'long', // long, short, narrow
+    day: 'numeric', // numeric, 2-digit
+    year: 'numeric', // numeric, 2-digit
+    month: 'long', // numeric, 2-digit, long, short, narrow
+})
+
+const hourlyItemData = {
+    icon: [0,0,0,0],
+    tempMain: [0,0,0,0],
+    tempFeelsLike: [0,0,0,0],
+    humidity: [0,0,0,0],
+    pressure: [0,0,0,0],
+    wind: [0,0,0,0],
+    description: [0,0,0,0],
+    hour: [0,0,0,0]
+}
+
+
 const defaultValues = {
+    time: formatted_time,
+    date: formatted_date,
     location: "--",
     temperature_main: "--",
+    hourlyData: hourlyItemData,
     temperature_feels_like: "--",
     humidity: "--",
     pressure: "--",
@@ -32,8 +60,12 @@ const defaultValues = {
     description: "--"
 }
 
+
+
 app.get("/", (req, res) => {
     res.render("home", {
+        time: defaultValues.time,
+        date: defaultValues.date,
         location: defaultValues.location,
         temperature_main: defaultValues.temperature_main,
         temperature_feels_like: defaultValues.temperature_feels_like,
@@ -41,7 +73,8 @@ app.get("/", (req, res) => {
         pressure: defaultValues.pressure,
         wind: defaultValues.wind,
         weatherIcon: defaultValues.weatherIcon,
-        description: defaultValues.description
+        description: defaultValues.description,
+        hourlyData: defaultValues.hourlyData
     })
 });
 
@@ -59,8 +92,50 @@ app.post("/", (req, res) => {
             const hourlyUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longtitude}&units=metric&exclude=minutely,daily,alerts&appid=${apiKey}`
 
             https.get(hourlyUrl , (response) => {
+
+                const hourlyItemData = {
+                    icon: [],
+                    tempMain: [],
+                    tempFeelsLike: [],
+                    humidity: [],
+                    pressure: [],
+                    wind: [],
+                    description: [],
+                    hour: []
+                }
+
                 response.on("data", (data) => {
                     const hourlyData = JSON.parse(data);
+                    for (let i = 1; i < 5; i++) {
+                        let now = date.getHours()
+                        let hourly = now + i
+                        
+                        hourlyItemData.hour.push(hourly)
+
+                        const iconData = hourlyData.hourly[hourly].weather[0].icon
+                        hourlyItemData.icon.push(iconData)
+
+                        const tempMainData = hourlyData.hourly[hourly].temp
+                        hourlyItemData.tempMain.push(tempMainData)
+
+                        const tempFeelsLikeData = hourlyData.hourly[hourly].feels_like
+                        hourlyItemData.tempFeelsLike.push(tempFeelsLikeData)
+
+                        const humidityData = hourlyData.hourly[hourly].humidity
+                        hourlyItemData.humidity.push(humidityData)
+
+                        const pressureData = hourlyData.hourly[hourly].pressure
+                        hourlyItemData.pressure.push(pressureData)
+
+                        const windData = hourlyData.hourly[hourly].wind_speed
+                        hourlyItemData.wind.push(windData)
+
+                        const descriptionData = hourlyData.hourly[hourly].weather[0].description
+                        hourlyItemData.description.push(descriptionData)
+                    }
+
+                    console.log(hourlyItemData.hour);
+
                     const icon = hourlyData.current.weather[0].icon;
                     const tempMain = hourlyData.current.temp;
                     const tempFeelsLike = hourlyData.current.feels_like;
@@ -112,8 +187,11 @@ app.post("/", (req, res) => {
         
 
                     res.render("home", {
+                        time: defaultValues.time,
+                        date: defaultValues.date,
                         location: query,
                         temperature_main: tempMain,
+                        hourlyData: hourlyItemData,
                         temperature_feels_like: tempFeelsLike,
                         humidity: humidity,
                         pressure: pressure,
@@ -121,6 +199,15 @@ app.post("/", (req, res) => {
                         weatherIcon: displayIcon,
                         description: description
                     })
+
+                    hourlyItemData.icon.length = 0
+                    hourlyItemData.tempMain.length = 0
+                    hourlyItemData.tempFeelsLike.length = 0
+                    hourlyItemData.humidity.length = 0
+                    hourlyItemData.pressure.length = 0
+                    hourlyItemData.wind.length = 0
+                    hourlyItemData.description.length = 0
+                    hourlyItemData.hour.length =0
                 })
             })
         })

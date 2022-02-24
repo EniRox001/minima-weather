@@ -15,8 +15,8 @@
         <div class="content-top">
             <img src="/images/img-1.jpg" alt="">
             <div class="font time-date">
-                <div class="time">7:10 <span class="am">AM</span></div>
-                <div class="date">Friday, 27 January, 2022</div>
+                <div class="time"><%= time %></div>
+                <div class="date"><%= date %></div>
                 <form action="/" method="POST">
                     <img class="search-icon" src="/svg/search.png" alt="">
                     <input name="location" class="search-bar font" type="text" placeholder="Enter Location">
@@ -39,43 +39,43 @@
                         </div>
                         <img class="mb-weather-icon" src="/svg/thunderstorm.png" alt="">
                         <div class="mb-weather-temp">
-                            22°
+                            <%= Math.round(temperature_main) %>°
                         </div>
                     </div>
                     <div class="weather-forecast">
                         <div class="mb-weather-time">
-                            5PM
+                            <%= hourlyData.hour[0] %>
                         </div>
                         <img class="mb-weather-icon" src="/svg/shower rain.png" alt="">
                         <div class="mb-weather-temp">
-                            25°
+                            <%= Math.round(hourlyData.tempMain[0]) %>°
                         </div>
                     </div>
                     <div class="weather-forecast">
                         <div class="mb-weather-time">
-                            6PM
+                            <%= hourlyData.hour[1] %>
                         </div>
                         <img class="mb-weather-icon" src="/svg/shower rain.png" alt="">
                         <div class="mb-weather-temp">
-                            28°
+                            <%= Math.round(hourlyData.tempMain[1]) %>°
                         </div>
                     </div>
                     <div class="weather-forecast">
                         <div class="mb-weather-time">
-                            7PM
+                            <%= hourlyData.hour[2] %>
                         </div>
                         <img class="mb-weather-icon" src="/svg/rain.png" alt="">
                         <div class="mb-weather-temp">
-                            21°
+                            <%= Math.round(hourlyData.tempMain[2]) %>°
                         </div>
                     </div>
                     <div class="weather-forecast">
                         <div class="mb-weather-time">
-                            8PM
+                            <%= hourlyData.hour[3] %>
                         </div>
                         <img class="mb-weather-icon" src="/svg/scattered clouds.png" alt="">
                         <div class="mb-weather-temp">
-                            18°
+                            <%= Math.round(hourlyData.tempMain[3]) %>°
                         </div>
                     </div>
                 </div>
